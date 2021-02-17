@@ -10416,3 +10416,72 @@ a.text-dark:hover, a.text-dark:focus {
 .dropdown-menu .dropdown-header {
   color: #868e96;
 }
+
+.FooterMod {
+    background: rgba(235,235,235,0.73);
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    color: black;
+    font-family: Calibri;
+}
+
+.FondoEdificio {
+    background: url(../Content/Imagenes/fondo1.jpg) no-repeat center fixed;
+    background-size: cover;
+}
+
+.fondotransparenteblanco {
+    background-color: rgba(255, 255, 255, 0.80);
+    text-align: center;
+    border-radius: 10px;
+    padding: 30px, 30px, 20px;
+    align-content: center;
+}
+
+.LogoLogin {
+    width: 170px;
+    margin: auto;
+    text-align: center;
+}
+
+.BotonEstirado {
+    width: 100%;
+}
+
+.ContenidoCentro {
+    max-width: 450px;
+    margin: auto;
+    text-align: center;
+    position: relative;
+    min-height: 1px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.imagenbloqueo {
+    background: no-repeat center fixed;
+    background-size: cover;
+    min-width: 200px;
+    max-width: 512px;
+}
+
+
+.TextoLink {
+    color: dodgerblue;
+}
+
+    .TextoLink:active {
+        color: dodgerblue
+    }
+
+    .TextoLink:link {
+        color: dodgerblue
+    }
+
+    .TextoLink:visited {
+        color: dodgerblue
+    }

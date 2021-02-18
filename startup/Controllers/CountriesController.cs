@@ -169,15 +169,15 @@ namespace startup.Controllers
                 {
                     db.Countries.Add(country);
                     var response = DBHelper.SaveChanges(db);
-                    if (!response.Succedeed)
-                    {
-                        ModelState.AddModelError(string.Empty, response.Message);
+                    if (response.Succedeed)
+                    {                      
+                        return RedirectToAction("Index");
                     }
-                    return RedirectToAction("Index");
+                    ModelState.AddModelError(string.Empty, response.Message);
                 }
                 catch (Exception ex)
                 {
-                    ModelState.AddModelError(string.Empty, ex.Message);
+                    ModelState.AddModelError(string.Empty,ex.Message);
                 }
             }
 
@@ -240,11 +240,11 @@ namespace startup.Controllers
             {
                 db.Countries.Remove(country);
                 var response = DBHelper.SaveChanges(db);
-                if (!response.Succedeed)
+                if (response.Succedeed)
                 {
-                    ModelState.AddModelError(string.Empty, response.Message);
+                    return RedirectToAction("Index");                    
                 }
-                return RedirectToAction("Index");
+                ModelState.AddModelError(string.Empty, response.Message);
             }
             catch (Exception ex)
             {

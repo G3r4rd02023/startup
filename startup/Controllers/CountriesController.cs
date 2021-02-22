@@ -26,7 +26,7 @@ namespace startup.Controllers
                 return HttpNotFound();
             }
 
-            City model = new City { CountryId = country.CountyrId };
+            City model = new City { CountryId = country.CountryId };
             return View(model);
 
         }
@@ -42,7 +42,7 @@ namespace startup.Controllers
                 {
                     Country country = db.Countries
                            .Include(c => c.Cities)
-                           .FirstOrDefault(c => c.CountyrId == city.CountryId);
+                           .FirstOrDefault(c => c.CountryId == city.CountryId);
 
                     country.Cities.Add(city);
 
@@ -52,7 +52,7 @@ namespace startup.Controllers
                     {
                         ModelState.AddModelError(string.Empty, response.Message);
                     }
-                    return RedirectToAction($"{nameof(Details)}/{country.CountyrId}");
+                    return RedirectToAction($"{nameof(Details)}/{country.CountryId}");
                 }
                 catch (Exception ex)
                 {
@@ -79,7 +79,7 @@ namespace startup.Controllers
             }
 
             var country = db.Countries.FirstOrDefault(c => c.Cities.FirstOrDefault(p => p.CountryId == city.CountryId) != null);
-            city.CountryId = country.CountyrId;
+            city.CountryId = country.CountryId;
 
             return View(city);
         }

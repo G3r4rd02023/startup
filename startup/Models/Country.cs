@@ -7,7 +7,7 @@ namespace startup.Models
     public class Country
     {
         [Key]
-        public int CountyrId { get; set; }
+        public int CountryId { get; set; }
 
         [Required(ErrorMessage = "El campo {0} es requerido")]
         [StringLength(50, ErrorMessage = "El campo {0} puede contener máximo {1} caracteres")]
@@ -16,6 +16,8 @@ namespace startup.Models
         public string Name { get; set; }
 
         public virtual ICollection<City> Cities { get; set; }
+
+        public virtual ICollection<Company> Companies { get; set; }
 
     }
 }

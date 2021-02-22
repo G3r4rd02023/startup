@@ -17,5 +17,7 @@ namespace startup.Models
         public DbSet<Country> Countries { get; set; }
 
         public DbSet<City> Cities { get; set; }
+
+        public DbSet<Company> Companies { get; set; }
     }
 }

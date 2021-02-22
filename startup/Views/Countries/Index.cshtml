@@ -27,9 +27,9 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.ActionLink("Editar", "Edit", new { id = item.CountyrId }, new { @class = "btn btn-info" })
-                @Html.ActionLink("Detalles", "Details", new { id = item.CountyrId }, new { @class = "btn btn-warning" })
-                <button type="button" class="dialog-window btn btn-danger" data-id="@item.CountyrId">Eliminar</button>
+                @Html.ActionLink("Editar", "Edit", new { id = item.CountryId }, new { @class = "btn btn-info" })
+                @Html.ActionLink("Detalles", "Details", new { id = item.CountryId }, new { @class = "btn btn-warning" })
+                <button type="button" class="dialog-window btn btn-danger" data-id="@item.CountryId">Eliminar</button>
             </td>
         </tr>
     }

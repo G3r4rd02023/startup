@@ -26,5 +26,7 @@ namespace startup.Models
 
         public virtual Country Country { get; set; }
 
+        public virtual ICollection<Company> Companies { get; set; }
+
     }
 }

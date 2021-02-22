@@ -29,7 +29,7 @@ namespace startup.Helpers
             cities.Add(new City
             {
                 CityId = 0,
-                Name = "[Select a city...]",
+                Name = "[Selecciona una Ciudad...]",
             });
 
             return cities.OrderBy(c => c.Name).ToList();

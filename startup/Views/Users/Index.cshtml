@@ -1,0 +1,99 @@
+﻿@model PagedList.IPagedList<startup.Models.User>
+@using PagedList.Mvc;
+
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Usuarios</h2>
+
+<p>
+    @Html.ActionLink("Crear Usuario", "Create", new { }, new { @class = "btn btn-primary" })
+</p>
+
+@using (Html.BeginForm())
+{
+    <p>
+        Buscar por nombre: @Html.TextBox("name")
+        <input type="submit" value="Buscar" />
+    </p>
+}
+
+
+<table class="table">
+    <tr>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().FullName)
+        </th>            
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Photo)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>          
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FullName)
+            </td>                    
+            <td>
+                @if (!string.IsNullOrEmpty(item.Photo))
+                {
+                    <img src="@Url.Content(item.Photo)" alt="Image" style="width:100px;height:150px;max-width: 100%; height: auto;" />
+                }
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.UserId }, new { @class = "btn btn-info" })
+                @Html.ActionLink("Detalles", "Details", new { id = item.UserId }, new { @class = "btn btn-warning" })
+                <button type="button" class="dialog-window btn btn-danger" data-id="@item.UserId">Eliminar</button>
+            </td>
+        </tr>
+    }
+</table>
+
+Página: @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber), de: @Model.PageCount
+@Html.PagedListPager(Model, page => Url.Action("Index", new
+{
+    page,
+    sortOrder =
+    ViewBag.CurrentSort,
+    currentFilter = ViewBag.CurrentFilter
+}))
+
+<div class="modal fade" id="DeleteUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h2 class="modal-title">Eliminar Usuario</h2>
+            </div>
+            <div class="modal-body">
+                <div class="te">
+                    Esta seguro de eliminar este registro?
+                </div>
+                <div id="response">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+    $("body").on("click", "button.dialog-window", null, function (e) {
+    var htmlContent = '<br /><a href="@Url.Action("Delete", "Users")/' + $(this).data('id') + '" class="btn btn-danger">Yes</a>&nbsp&nbsp&nbsp&nbsp<button type="button" id="btnNo" class="btn btn-success" data-dismiss="modal" aria-hidden="true">No</button>';
+    $("#response").html(htmlContent);
+    $('#DeleteUser').modal('show');
+    });
+    </script>
+}

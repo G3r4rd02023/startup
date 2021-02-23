@@ -19,5 +19,7 @@ namespace startup.Models
         public DbSet<City> Cities { get; set; }
 
         public DbSet<Company> Companies { get; set; }
+
+        public System.Data.Entity.DbSet<startup.Models.User> Users { get; set; }
     }
 }

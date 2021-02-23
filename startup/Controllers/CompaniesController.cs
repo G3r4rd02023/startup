@@ -1,4 +1,5 @@
-﻿using startup.Helpers;
+﻿using PagedList;
+using startup.Helpers;
 using startup.Models;
 using System;
 using System.Data.Entity;
@@ -13,12 +14,14 @@ namespace startup.Controllers
         private StartupContext db = new StartupContext();
 
         // GET: Companies
-        public ActionResult Index()
+        public ActionResult Index(int? page = null)
         {
+            page = (page ?? 1);
             var companies = db.Companies.
                 Include(c => c.City).
-                Include(d => d.Country);
-            return View(companies.ToList());
+                Include(d => d.Country).
+                OrderBy(c => c.Country.Name).ThenBy(c => c.Name);
+            return View(companies.ToPagedList((int)page, 4));
         }
 
         // GET: Companies/Details/5
@@ -91,7 +94,7 @@ namespace startup.Controllers
                 return HttpNotFound();
             }
             ViewBag.CityId = new SelectList(CombosHelper.GetCities(), "CityId", "Name", company.CityId);
-            ViewBag.CountryId = new SelectList(CombosHelper.GetCountries(), "CountryId", "Name",company.CountryId);
+            ViewBag.CountryId = new SelectList(CombosHelper.GetCountries(), "CountryId", "Name", company.CountryId);
             return View(company);
         }
 
@@ -102,9 +105,9 @@ namespace startup.Controllers
         public ActionResult Edit(Company company)
         {
             if (ModelState.IsValid)
-            {                
+            {
                 if (company.LogoFile != null)
-                {                   
+                {
                     var folder = "~/Content/Logos";
                     var file = string.Format("{0}.jpg", company.CompanyId);
                     var response = FilesHelper.UploadPhoto(company.LogoFile, folder, file);
@@ -116,7 +119,7 @@ namespace startup.Controllers
                         db.SaveChanges();
                     }
                 }
-               
+
                 return RedirectToAction("Index");
             }
 
@@ -134,7 +137,7 @@ namespace startup.Controllers
             }
 
             Company company = db.Companies.Find(id);
-            
+
             if (company == null)
             {
                 return HttpNotFound();
@@ -148,7 +151,7 @@ namespace startup.Controllers
                 {
                     return RedirectToAction("Index");
                 }
-                ModelState.AddModelError(string.Empty, response.Message);               
+                ModelState.AddModelError(string.Empty, response.Message);
                 return RedirectToAction("Index");
             }
             catch (Exception ex)
@@ -160,7 +163,7 @@ namespace startup.Controllers
             return View(company);
         }
 
-       
+
 
         protected override void Dispose(bool disposing)
         {

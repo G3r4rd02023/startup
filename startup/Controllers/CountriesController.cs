@@ -1,4 +1,5 @@
-﻿using startup.Helpers;
+﻿using PagedList;
+using startup.Helpers;
 using startup.Models;
 using System;
 using System.Data.Entity;
@@ -129,9 +130,21 @@ namespace startup.Controllers
         }
 
         // GET: Countries
-        public ActionResult Index()
+        public ActionResult Index(string name, int? page = null)
         {
-            return View(db.Countries.ToList());
+            page = (page ?? 1);
+
+            var countries = from s in db.Countries
+                            .Include(c=>c.Cities)
+                            .OrderBy(c=>c.Name) 
+                            select s;
+
+            if (!String.IsNullOrEmpty(name))
+            {
+                countries = countries.Where(s => s.Name.Contains(name));  
+            }
+            
+            return View(countries.ToPagedList((int)page,4));
         }
 
         // GET: Countries/Details/5

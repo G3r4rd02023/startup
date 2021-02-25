@@ -20,6 +20,11 @@ namespace startup.Models
 
         public DbSet<Company> Companies { get; set; }
 
-        public System.Data.Entity.DbSet<startup.Models.User> Users { get; set; }
+        public DbSet<User> Users { get; set; }
+
+        public DbSet<Customer> Customers { get; set; }
+
+        public DbSet<CompanyCustomer> CompanyCustomers { get; set; }
+
     }
 }

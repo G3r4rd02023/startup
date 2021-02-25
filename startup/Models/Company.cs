@@ -50,5 +50,7 @@ namespace startup.Models
 
         public virtual ICollection<User> Users { get; set; }
 
+        public virtual ICollection<CompanyCustomer> CompanyCustomers { get; set; }
+
     }
 }

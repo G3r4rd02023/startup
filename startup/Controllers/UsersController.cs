@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace startup.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class UsersController : Controller
     {
         private StartupContext db = new StartupContext();

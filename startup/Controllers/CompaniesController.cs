@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace startup.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class CompaniesController : Controller
     {
         private StartupContext db = new StartupContext();

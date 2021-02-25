@@ -15,11 +15,25 @@ namespace startup.Controllers
     [Authorize]
     public class AccountController : Controller
     {
+        private StartupContext db = new StartupContext();
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
         public AccountController()
         {
+        }
+
+        public void Logo(LoginViewModel model)
+        {
+            var user = db.Users.Where(u => u.UserName == model.Email).FirstOrDefault();
+            if (user != null)
+            {
+                var company = db.Companies.Find(user.CompanyId);
+                if (company != null)
+                {
+                    Session["Logo"] = company.Logo;
+                }
+            }
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
@@ -51,6 +65,8 @@ namespace startup.Controllers
                 _userManager = value;
             }
         }
+
+
 
         //
         // GET: /Account/Login

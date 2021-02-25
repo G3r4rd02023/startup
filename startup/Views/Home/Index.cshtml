@@ -2,12 +2,19 @@
     ViewBag.Title = "Home Page";
 }
 
+
+
 <header class="masthead text-center text-white">
     <div class="masthead-content">
         <div class="container">
             <h1 class="masthead-heading mb-0">Startup</h1>
             <h2 class="masthead-subheading mb-0">La aplicacion ideal para emprendores</h2>
-            <a href="#" class="btn btn-primary btn-xl rounded-pill mt-5">Leer Más</a>
+           <hr />
+            @if (Model != null && !string.IsNullOrEmpty(Model.Company.Logo))
+            {
+                <img src="@Url.Content(Model.Company.Logo)" alt="Image" style="width:200px;height:200px;max-width: 100%; height: auto;" />
+            }
+            <hr />
         </div>
     </div>
     <div class="bg-circle-1 bg-circle"></div>

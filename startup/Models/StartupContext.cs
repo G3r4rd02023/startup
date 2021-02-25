@@ -26,5 +26,6 @@ namespace startup.Models
 
         public DbSet<CompanyCustomer> CompanyCustomers { get; set; }
 
+        public System.Data.Entity.DbSet<startup.Models.Category> Categories { get; set; }
     }
 }
